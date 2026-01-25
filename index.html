@@ -20,37 +20,37 @@
             font-family: 'Noto Sans TC', sans-serif;
             background-color: var(--bg-cream);
             color: var(--text-dark);
-            padding-top: 100px; /* 增加頂部留白，避免被導航列擋住 */
+            padding-top: 100px;
             padding-bottom: 60px;
         }
 
-        /* --- 1. 導航列優化 (解決按鈕太擠太小的問題) --- */
+        /* 導航列 */
         .navbar {
             background: linear-gradient(135deg, var(--hk-red), #d9534f);
             box-shadow: 0 4px 12px rgba(183, 28, 28, 0.3);
-            padding: 10px 0; /* 增加高度 */
+            padding: 10px 0;
         }
         
         .navbar-nav {
             width: 100%;
             display: flex;
             flex-direction: row;
-            justify-content: space-evenly; /* 平均分配空間 */
+            justify-content: space-evenly;
             align-items: center;
         }
 
         .nav-item {
-            flex: 1; /* 讓每個按鈕佔據相同寬度 */
+            flex: 1;
             text-align: center;
-            max-width: 20%; /* 5個按鈕，最大20% */
+            max-width: 20%; /* 回復成 5 個按鈕的寬度 */
         }
 
         .nav-link { 
             color: rgba(255,255,255,0.9) !important; 
             font-weight: 500; 
-            font-size: 1rem; /* 字體加大 */
-            padding: 8px 5px !important; /* 增加點擊範圍 */
-            white-space: nowrap; /* 防止文字換行 */
+            font-size: 1rem;
+            padding: 8px 5px !important;
+            white-space: nowrap;
         }
 
         .nav-link.active { 
@@ -63,12 +63,9 @@
         /* Hero Image */
         .hero-banner {
             background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('images/hk.jpg');
-            
-            /* 以下保持原本設定不動 */
             background-size: cover;
             background-position: center 30%;
             height: 220px;
-            /*border-radius: 0 0 25px 25px;*/
             margin-top: -100px;
             margin-bottom: 30px;
             display: flex;
@@ -107,7 +104,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 5px solid transparent; transition: all 0.2s;
         }
         .timeline-content::after {
-            content: '\F285'; /* Bootstrap Icon chevron-right */
+            content: '\F285';
             font-family: 'bootstrap-icons';
             position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
             color: #ddd; font-size: 1.2rem;
@@ -117,11 +114,10 @@
         .location-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; }
         .location-desc { font-size: 0.85rem; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 85%; }
 
-        /* --- 詳細資訊 Modal 樣式 --- */
+        /* Modal 樣式 */
         .modal-content { border-radius: 20px; overflow: hidden; border: none; }
         .modal-body { padding: 0; }
         
-        /* 左側 (標題區) */
         .detail-left {
             background: linear-gradient(135deg, var(--hk-red), #8e0000);
             color: white;
@@ -140,18 +136,16 @@
         .detail-time { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; opacity: 0.9; margin-bottom: 5px; }
         .detail-title { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
 
-        /* 右側 (內容區) */
         .detail-right { padding: 30px; background-color: #fff; display: flex; flex-direction: column; }
         .detail-desc { font-size: 1rem; line-height: 1.6; color: #444; white-space: pre-line; } 
         
-        /* 彈窗內的圖片樣式 */
         .modal-image-container {
             width: 100%;
             height: 200px;
             overflow: hidden;
             border-radius: 12px;
             margin-bottom: 20px;
-            display: none; /* 預設隱藏，有圖片才顯示 */
+            display: none;
             background-color: #eee;
         }
         .modal-image-container img {
@@ -167,7 +161,7 @@
         }
         .btn-map-modal:hover { background-color: #a88a50; color: white; transform: translateY(-2px); }
 
-        /* Day 4 按鈕樣式 - 避免繼承導航列樣式 */
+        /* Day 4 按鈕 */
         #btn-plan-a, #btn-plan-b {
             color: white !important;
             border: none;
@@ -175,16 +169,9 @@
             font-weight: 600;
             padding: 10px 25px !important;
         }
-        #btn-plan-a.bg-primary {
-            background-color: #198754 !important;
-        }
-        #btn-plan-b.bg-success {
-            background-color: #198754 !important;
-        }
-        #btn-plan-a.bg-light, #btn-plan-b.bg-light {
-            background-color: #f8f9fa !important;
-            color: #212529 !important;
-        }
+        #btn-plan-a.bg-primary { background-color: #198754 !important; }
+        #btn-plan-b.bg-success { background-color: #198754 !important; }
+        #btn-plan-a.bg-light, #btn-plan-b.bg-light { background-color: #f8f9fa !important; color: #212529 !important; }
 
     </style>
 </head>
@@ -210,7 +197,9 @@
     </div>
 
     <div class="container">
+        
         <div id="home" class="content-section active">
+            
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body">
                     <h5 class="fw-bold text-danger"><i class="bi bi-airplane-fill me-2"></i>航班</h5>
@@ -218,6 +207,7 @@
                     <p class="mb-0">回: BR0850 (19:30-21:05)</p>
                 </div>
             </div>
+
             <div class="card border-0 shadow-sm mb-4" style="background-color: #fff3cd;">
                 <div class="card-body">
                     <h5 class="fw-bold text-dark"><i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>行前注意事項</h5>
@@ -230,16 +220,30 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(to right, #fff, #fff0f0);">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5 class="fw-bold text-danger mb-1"><i class="bi bi-heart-fill me-2"></i>美食口袋清單</h5>
+                        <small class="text-muted">已整理在 Google Maps</small>
+                    </div>
+                    <a href="https://maps.app.goo.gl/6gSZyAD5GYgoB42V8?g_st=i" target="_blank" class="btn btn-danger rounded-pill px-4">
+                        <i class="bi bi-map-fill me-1"></i> 香港 · Jacqueline
+                    </a>
+                </div>
+            </div>
+
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body">
                     <h5 class="fw-bold text-danger"><i class="bi bi-house-heart-fill me-2"></i>住宿</h5>
                     <p class="mb-2 fw-bold">灣仔睿景酒店</p>
                     <a href="https://www.google.com/maps/search/?api=1&query=灣仔睿景酒店" target="_blank" class="btn btn-sm btn-outline-danger">地圖</a>
                     <div class="mt-3">
-                         <img src="images/hotel.jpg" class="img-fluid rounded" alt="住宿圖片">
+                         <img src="images/hotel.jpg" class="img-fluid rounded" alt="住宿圖片" onerror="this.style.display='none'">
                     </div>
                 </div>
             </div>
+
             <div class="alert alert-light border text-center text-muted">
                  ☝ 點擊上方分頁查看每日詳細行程 ☝
             </div>
@@ -292,7 +296,7 @@
                         <button type="button" class="btn-close position-absolute top-0 end-0 m-3 d-none d-md-block" data-bs-dismiss="modal"></button>
                         
                         <div id="modal-img-wrapper" class="modal-image-container">
-                            <img id="modal-img" src="" alt="景點圖片">
+                            <img id="modal-img" src="" alt="景點圖片" onerror="this.style.display='none'">
                         </div>
 
                         <h5 class="fw-bold mb-2" style="color:var(--hk-gold)">行程介紹</h5>
@@ -325,8 +329,8 @@
                 { time: "14:00", title: "世華茶餐廳", icon: "bi-cup-hot", type: "food", map: "https://maps.app.goo.gl/47K3Muc8j8LZ9iaU7", img: "images/D1_lunch.jpg", desc: "第一餐當然要吃道地茶餐廳！\n推薦：乾炒牛河、西多士、凍檸茶。" },
                 { time: "16:15", title: "上環西港城", icon: "bi-building", type: "spot", map: "https://maps.app.goo.gl/BShxp4G6t1cCf3Vz7", img: "images/upringwestport.jpg", desc: "愛德華式建築風格的法定古蹟。\n這裡也是 Klook 叮叮車全景遊的集合點/起點。\n體驗復古電車風情。" },
                 { time: "17:15", title: "叮叮車抵達銅鑼灣", icon: "bi-train-lightrail-front", type: "transport", img: "images/dingding.jpg", desc: "沿途經過中環、灣仔，最後抵達熱鬧的銅鑼灣總站。\n下車後可感受港島最繁忙的街道氣氛。" },
-                { time: "17:30", title: "維園 & 怡和午炮", icon:"bi-tree" , type:"spot" , map:"https://maps.app.goo.gl/rPNbZh3QhqQpLw2aA" , img : 	"images/victoria_park.jpg" , desc:"維多利亞公園是香港最大的公園。\n怡和午炮就在附近，是一個歷史悠久的禮炮儀式點。\n適合散步拍照。" },
-                { time:"19.00" , title:"大壹燒鵝" , icon:"bi-fire" , type:"food" , map:"https://maps.app.goo.gl/dLhAsA6C1gzyy3q97" , img:"images/D1_dinner.jpg" , desc:"晚餐享用著名的燒鵝！\n皮脆肉嫩，記得沾梅子醬解膩。"}
+                { time: "17:30", title: "維園 & 怡和午炮", icon:"bi-tree" , type:"spot" , map:"https://maps.app.goo.gl/rPNbZh3QhqQpLw2aA" , img : "images/victoria_park.jpg" , desc:"維多利亞公園是香港最大的公園。\n怡和午炮就在附近，是一個歷史悠久的禮炮儀式點。\n適合散步拍照。" },
+                { time:"19:00" , title:"大壹燒鵝" , icon:"bi-fire" , type:"food" , map:"https://maps.app.goo.gl/dLhAsA6C1gzyy3q97" , img:"images/D1_dinner.jpg" , desc:"晚餐享用著名的燒鵝！\n皮脆肉嫩，記得沾梅子醬解膩。"}
             ],
             day2: [
                 { time: "09:30", title: "起床", icon: "bi-sun", type: "sleep", desc: "早安香港！10:00 準時出門。" },
