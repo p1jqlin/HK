@@ -225,7 +225,11 @@
 
         <div id="day1" class="content-section">
             <h3 class="fw-bold mb-4 ps-2 border-start border-5 border-danger">Day 1: 港島風情</h3>
-            <div class="timeline" id="list-day1"></div>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <button id="btn-day1-a" class="btn-plan active" onclick="showDay1('A')">方案 A: 經典叮叮車</button>
+                <button id="btn-day1-b" class="btn-plan" onclick="showDay1('B')">方案 B: 淺水灣看海</button>
+            </div>
+            <div id="day1-list-container" class="timeline"></div>
         </div>
         <div id="day2" class="content-section">
             <h3 class="fw-bold mb-4 ps-2 border-start border-5 border-danger">Day 2: 經典中環</h3>
@@ -270,18 +274,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const tripData = {
-            day1: [
-                { time: "06:30", title: "起床 / 出門", icon: "bi-alarm", type: "sleep", desc: "檢查護照、港簽、八達通是否帶齊。\n預計 07:00 出門前往機場。" },
-                { time: "07:40", title: "抵達小港機場", icon: "bi-airplane", type: "transport", desc: "前往長榮航空櫃台報到掛行李。\n逛逛免稅店準備出發！" },
-                { time: "09:15", title: "BR0845 起飛", icon: "bi-airplane-engines", type: "transport", desc: "預計飛行時間 1小時40分。\n機上享用飛機餐。" },
-                { time: "10:55", title: "抵達香港機場", icon: "bi-geo-alt-fill", type: "transport", desc: "跟隨指示入境，填寫入境卡。\n領取行李後前往巴士站。" },
-                { time: "12:00", title: "機場巴士 A11", icon: "bi-bus-front", type: "transport", img: "images/airport.webp", desc: "出海關後前往巴士總站。\nA11 往北角碼頭方向。\n車程約 40-50 分鐘，沿途可欣賞青馬大橋風景。" },
-                { time: "13:00", title: "灣仔睿景酒店", icon: "bi-luggage", type: "spot", map: "https://www.google.com/maps/search/?api=1&query=灣仔睿景酒店", img: "images/hotel.jpg", desc: "先寄放行李，辦理入住手續(若房間好了可先進房)。\n輕裝出門開始行程！" },
-                { time: "14:00", title: "世華茶餐廳", icon: "bi-cup-hot", type: "food", map: "https://maps.app.goo.gl/xxx", img: "images/D1_lunch.jpg", desc: "道地茶餐廳，推薦：乾炒牛河。" },
-                { time: "15:30", title: "搭乘叮叮車前往銅鑼灣", icon: "bi-train-lightrail-front", type: "transport", img: "/images/dingding.jpg", desc: "在灣仔搭乘充滿復古風情的叮叮車前往銅鑼灣。\n體驗港島特有的街道景緻。" },
-                { time: "16:00", title: "維園 & 怡和午炮", icon: "bi-tree", type: "spot", map: "https://maps.app.goo.gl/rPNbZh3QhqQpLw2aA", img: "/images/victoria_park.jpg", desc: "維多利亞公園是香港最大的公園。\n怡和午炮就在附近，是一個歷史悠久的禮炮儀式點。\n適合散步拍照。" },
-                { time: "18:00", title: "大壹燒鵝", icon: "bi-fire", type: "food", map: "https://maps.app.goo.gl/dLhAsA6C1gzyy3q97", img: "images/D1_dinner.jpg", desc: "晚餐享用著名的燒鵝！\n皮脆肉嫩，記得沾梅子醬解膩。" }
-            ],
+            commonDay1Start: [
+                    { time: "06:30", title: "起床 / 出門", icon: "bi-alarm", type: "sleep", desc: "檢查護照、港簽、八達通是否帶齊。\n預計 07:00 出門前往機場。" },
+                    { time: "07:40", title: "抵達小港機場", icon: "bi-airplane", type: "transport", desc: "前往長榮航空櫃台報到掛行李。\n逛逛免稅店準備出發！" },
+                    { time: "09:15", title: "BR0845 起飛", icon: "bi-airplane-engines", type: "transport", desc: "預計飛行時間 1小時40分。\n機上享用飛機餐。" },
+                    { time: "10:55", title: "抵達香港機場", icon: "bi-geo-alt-fill", type: "transport", desc: "跟隨指示入境，填寫入境卡。\n領取行李後前往巴士站。" },
+                    { time: "12:00", title: "機場巴士 A11", icon: "bi-bus-front", type: "transport", img: "images/airport.webp", desc: "出海關後前往巴士總站。\nA11 往北角碼頭方向。\n車程約 40-50 分鐘，沿途可欣賞青馬大橋風景。" },
+                    { time: "13:00", title: "灣仔睿景酒店", icon: "bi-luggage", type: "spot", map: "https://www.google.com/maps/search/?api=1&query=灣仔睿景酒店", img: "images/hotel.jpg", desc: "先寄放行李，辦理入住手續。\n輕裝出門開始行程！" },
+                    { time: "14:00", title: "世華茶餐廳", icon: "bi-cup-hot", type: "food", map: "https://maps.app.goo.gl/xxx", img: "images/D1_lunch.jpg", desc: "道地茶餐廳，推薦：乾炒牛河。" }
+                ],
+                day1A: [
+                    { time: "15:30", title: "搭乘叮叮車", icon: "bi-train-lightrail-front", type: "transport", img: "/images/dingding.jpg", desc: "在灣仔搭乘復古叮叮車前往銅鑼灣。\n體驗港島特有的街道景緻。" },
+                    { time: "16:00", title: "維園 & 怡和午炮", icon: "bi-tree", type: "spot", map: "https://maps.app.goo.gl/rPNbZh3QhqQpLw2aA", img: "/images/victoria_park.jpg", desc: "維多利亞公園散步。\n怡和午炮是歷史悠久的禮炮儀式點。" }
+                ],
+                day1B: [
+                    { time: "15:30", title: "搭乘巴士往南區", icon: "bi-bus-front", type: "transport", desc: "從灣仔搭乘 6, 6A 或 260 號巴士。\n車程約 20-30 分鐘，翻過山頭就能看海。" },
+                    { time: "16:15", title: "淺水灣沙灘", icon: "bi-water", type: "spot", map: "https://maps.app.goo.gl/tUMPrGctCzrw2zcu8", img: "images/shallow_water_bay.jpg", desc: "香港最著名的沙灘。\n可以去鎮海樓公園參觀巨大的天后像與觀音像。" },
+                    { time: "17:30", title: "影灣園 (The Repulse Bay)", icon: "bi-building", type: "spot", map: "https://maps.app.goo.gl/4vPa26bnfWX2EuNp6", img: "images/repulse_bay.jpg", desc: "殖民地風格建築，充滿復古浪漫氛圍。\n可以在此休息拍美照。" }
+                ],
+                commonDay1End: [
+                    { time: "18:00", title: "大壹燒鵝", icon: "bi-fire", type: "food", map: "https://maps.app.goo.gl/dLhAsA6C1gzyy3q97", img: "images/D1_dinner.jpg", desc: "晚上回歸美食，享用著名的燒鵝！" }
+                ],
             day2: [
                 { time: "09:30", title: "起床", icon: "bi-sun", type: "sleep", desc: "早安香港！10:00 準時出門。" },
                 { time: "10:30", title: "薔紅餐廳", icon: "bi-egg-fried", type: "food", map: "https://maps.app.goo.gl/DATPuberoe4xnxkb6", img: "images/D2_lunch.jpg", desc: "必點：脆皮燒春雞、豬扒包拼茄汁意粉。" },
@@ -290,7 +303,7 @@
                 { time: "13:30", title: "杜莎夫人蠟像館", icon: "bi-person-badge", type: "spot", map:"https://maps.app.goo.gl/xrzRUWdbZ56PvN1HA", img: "images/dusseldorf_wax_museum.jpg", desc: "(選)\n如果對明星蠟像有興趣可以進去逛逛，冷氣很涼。" },
                 { time: "14:30", title: "大館 Tai Kwun", icon: "bi-bricks", type: "spot", map:"https://maps.app.goo.gl/FfjHsNehnTnXuGpa6", img: "images/tai_kwun.jpg", desc: "前中區警署建築群活化。\n可以在監獄操場拍照，參觀古蹟展覽，建築非常有特色。" },
                 { time: "16:00", title: "中環半山扶手電梯", icon: "bi-arrow-up-right", type: "spot", map:"https://maps.app.goo.gl/EmGA28kysfRiGUBw7", img: "images/chinese_culture_center.jpg", desc: "世界最長的戶外手扶梯系統。\n電影《重慶森林》拍攝地。\n順道逛逛活化後的中環街市。" },
-                { time: "17:30", title: "觀光巴士落日飛車H2K", icon: "bi-bus", type: "transport", map:"https://maps.app.goo.gl/P2VtPpCiva7hEScr5", img:"images/bus_H2K.png" , desc:"每日：下午6:30至晚上10:30，每6分鐘至半小時一班。\n夜遊香港的經典選擇，可欣賞維多利亞港夜景。" }
+                { time: "17:30", title: "觀光巴士落日飛車H2K(排隊約20min)", icon: "bi-bus", type: "transport", map:"https://maps.app.goo.gl/P2VtPpCiva7hEScr5", img:"images/bus_H2K.png" , desc:"每日：下午6:30至晚上10:30，每6分鐘至半小時一班。\n夜遊香港的經典選擇，可欣賞維多利亞港夜景。" }
             ],
             day3: [
                 { time: "09:00", title: "起床", icon: "bi-emoji-smile", type: "sleep", desc: "睡飽一點，今天要走九龍區。" },
@@ -312,10 +325,10 @@
             ],
             day4B: [
                 { time: "09:00", title: "起床 & 退房", icon: "bi-door-open", type: "sleep", desc: "早點起床，大嶼山行程需要時間。\n退房後簡單吃早餐。" },
-                { time: "12:30", title: "抵達東涌站", icon: "bi-train-front", type: "transport", desc: "寄放行李於東薈城或東涌站置物櫃。" },
-                { time: "12:45", title: "昂坪纜車", icon: "bi-clouds", type: "spot", map:"https://maps.app.goo.gl/jr6dhiDnCoqf99478", img: "images/ping_ya_cable_car.jpg", desc: "搭乘纜車前往昂坪。\n建議事先買好票，若膽子大可選「水晶車廂」透明地板。" },
+                { time: "12:00", title: "抵達東涌站", icon: "bi-train-front", type: "transport", desc: "寄放行李於東薈城或東涌站置物櫃。" },
+                { time: "12:30", title: "昂坪纜車", icon: "bi-clouds", type: "spot", map:"https://maps.app.goo.gl/jr6dhiDnCoqf99478", img: "images/ping_ya_cable_car.jpg", desc: "搭乘纜車前往昂坪。\n建議事先買好票，若膽子大可選「水晶車廂」透明地板。" },
                 { time: "13:00", title: "天壇大佛", icon: "bi-brightness-high", type: "spot", map:"https://maps.app.goo.gl/XihhRuMFnjvFUszw9", img: "images/tian_tan_buddha.jpg", desc: "參觀昂坪市集、爬樓梯朝聖大佛。\n山上空氣清新，環境清幽。" },
-                { time: "15:30", title: "纜車下山", icon: "bi-arrow-down", type: "transport", desc: "搭纜車回東涌，領行李，轉 S1 巴士去機場。" }
+                { time: "15:00", title: "纜車下山", icon: "bi-arrow-down", type: "transport", desc: "搭纜車回東涌，領行李，轉 S1 巴士去機場。" }
             ],
             commonReturn: [
                 { time: "19:30", title: "BR0850 起飛", icon: "bi-airplane-engines", type: "transport", desc: "帶著戰利品回家囉！" },
@@ -382,6 +395,15 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // 控制 Day 1 方案切換
+        function showDay1(plan) {
+            document.getElementById('btn-day1-a').classList.toggle('active', plan === 'A');
+            document.getElementById('btn-day1-b').classList.toggle('active', plan === 'B');
+            let data = (plan === 'A') ? tripData.day1A : tripData.day1B;
+            // 合併 共同開始 + 選擇方案 + 共同結尾
+            renderTimeline('day1-list-container', tripData.commonDay1Start.concat(data, tripData.commonDay1End));
+        }
+
         function showDay4(plan) {
             document.getElementById('btn-plan-a').classList.toggle('active', plan === 'A');
             document.getElementById('btn-plan-b').classList.toggle('active', plan === 'B');
@@ -390,9 +412,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderTimeline('list-day1', tripData.day1);
-            renderTimeline('list-day2', tripData.day2); // 範例引用
-            renderTimeline('list-day3', tripData.day3); // 範例引用
+            showDay1('A'); // 改用 showDay1 函數初始化
+            renderTimeline('list-day2', tripData.day2);
+            renderTimeline('list-day3', tripData.day3);
             showDay4('A');
         });
     </script>
