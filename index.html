@@ -42,7 +42,7 @@
         .nav-item {
             flex: 1;
             text-align: center;
-            max-width: 20%; /* 回復成 5 個按鈕的寬度 */
+            max-width: 20%;
         }
 
         .nav-link { 
@@ -51,6 +51,7 @@
             font-size: 1rem;
             padding: 8px 5px !important;
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .nav-link.active { 
@@ -60,7 +61,6 @@
             font-weight: bold;
         }
 
-        /* Hero Image */
         .hero-banner {
             background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('images/hk.jpg');
             background-size: cover;
@@ -74,11 +74,8 @@
             color: white;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
         }
-        .hero-banner .text-center {
-            margin-top: 60px;
-        }
+        .hero-banner .text-center { margin-top: 60px; }
 
-        /* 卡片與時間軸 */
         .content-section { display: none; animation: fadeIn 0.4s ease-out; }
         .content-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -104,8 +101,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 5px solid transparent; transition: all 0.2s;
         }
         .timeline-content::after {
-            content: '\F285';
-            font-family: 'bootstrap-icons';
+            content: '\F285'; font-family: 'bootstrap-icons';
             position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
             color: #ddd; font-size: 1.2rem;
         }
@@ -114,45 +110,24 @@
         .location-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; }
         .location-desc { font-size: 0.85rem; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 85%; }
 
-        /* Modal 樣式 */
         .modal-content { border-radius: 20px; overflow: hidden; border: none; }
-        .modal-body { padding: 0; }
-        
         .detail-left {
             background: linear-gradient(135deg, var(--hk-red), #8e0000);
-            color: white;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            color: white; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
         .detail-icon-box {
             width: 80px; height: 80px; background: rgba(255,255,255,0.2);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-size: 2.5rem; margin-bottom: 15px; backdrop-filter: blur(5px);
         }
-        .detail-time { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; opacity: 0.9; margin-bottom: 5px; }
-        .detail-title { font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
-
         .detail-right { padding: 30px; background-color: #fff; display: flex; flex-direction: column; }
         .detail-desc { font-size: 1rem; line-height: 1.6; color: #444; white-space: pre-line; } 
         
         .modal-image-container {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: none;
-            background-color: #eee;
+            width: 100%; height: 200px; overflow: hidden; border-radius: 12px; margin-bottom: 20px; display: none; background-color: #eee;
         }
-        .modal-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        
+        .modal-image-container img { width: 100%; height: 100%; object-fit: cover; }
 
         .btn-map-modal {
             background-color: var(--hk-gold); color: white; border-radius: 50px;
@@ -161,18 +136,26 @@
         }
         .btn-map-modal:hover { background-color: #a88a50; color: white; transform: translateY(-2px); }
 
-        /* Day 4 按鈕 */
-        #btn-plan-a, #btn-plan-b {
-            color: white !important;
-            border: none;
+        /* Day 4 按鈕修正：使用紅色與金色系 */
+        .btn-plan {
+            border: 2px solid var(--hk-red);
+            color: var(--hk-red);
+            background-color: transparent;
             border-radius: 8px;
             font-weight: 600;
-            padding: 10px 25px !important;
+            transition: 0.3s;
+            padding: 10px 25px;
+            cursor: pointer;
         }
-        #btn-plan-a.bg-primary { background-color: #198754 !important; }
-        #btn-plan-b.bg-success { background-color: #198754 !important; }
-        #btn-plan-a.bg-light, #btn-plan-b.bg-light { background-color: #f8f9fa !important; color: #212529 !important; }
-
+        .btn-plan:hover {
+            background-color: rgba(183, 28, 28, 0.1);
+            color: var(--hk-red);
+        }
+        .btn-plan.active {
+            background-color: var(--hk-red) !important;
+            color: white !important;
+            border-color: var(--hk-red) !important;
+        }
     </style>
 </head>
 <body>
@@ -197,17 +180,14 @@
     </div>
 
     <div class="container">
-        
         <div id="home" class="content-section active">
-            
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body">
-                    <h5 class="fw-bold text-danger"><i class="bi bi-airplane-fill me-2"></i>航班</h5>
+                    <h5 class="fw-bold text-danger"><i class="bi bi-airplane-fill me-2"></i>航班 (TPE-HKG)</h5>
                     <p class="mb-1">去: BR0845 (09:15-10:55)</p>
                     <p class="mb-0">回: BR0850 (19:30-21:05)</p>
                 </div>
             </div>
-
             <div class="card border-0 shadow-sm mb-4" style="background-color: #fff3cd;">
                 <div class="card-body">
                     <h5 class="fw-bold text-dark"><i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>行前注意事項</h5>
@@ -220,20 +200,18 @@
                     </ul>
                 </div>
             </div>
-
             <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(to right, #fff, #fff0f0);">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <div>
                         <h5 class="fw-bold text-danger mb-1"><i class="bi bi-heart-fill me-2"></i>美食口袋清單</h5>
-                        <small class="text-muted">已整理在 Google Maps，可共同編輯</small>
+                        <small class="text-muted">已整理在 Google Maps</small>
                     </div>
                     <a href="https://maps.app.goo.gl/6gSZyAD5GYgoB42V8?g_st=i" target="_blank" class="btn btn-danger rounded-pill px-4">
-                        <i class="bi bi-map-fill me-1"></i> 香港 · Jacqueline
+                        <i class="bi bi-map-fill me-1"></i> 查看地圖
                     </a>
                 </div>
             </div>
-
-            <div class="card border-0 shadow-sm mb-4">
+             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body">
                     <h5 class="fw-bold text-danger"><i class="bi bi-house-heart-fill me-2"></i>住宿</h5>
                     <p class="mb-2 fw-bold">灣仔睿景酒店</p>
@@ -243,39 +221,26 @@
                     </div>
                 </div>
             </div>
-
-            <div class="alert alert-light border text-center text-muted">
-                 ☝ 點擊上方分頁查看每日詳細行程 ☝
-            </div>
         </div>
 
         <div id="day1" class="content-section">
             <h3 class="fw-bold mb-4 ps-2 border-start border-5 border-danger">Day 1: 港島風情</h3>
             <div class="timeline" id="list-day1"></div>
         </div>
-
         <div id="day2" class="content-section">
             <h3 class="fw-bold mb-4 ps-2 border-start border-5 border-danger">Day 2: 經典中環</h3>
             <div class="timeline" id="list-day2"></div>
         </div>
-
         <div id="day3" class="content-section">
             <h3 class="fw-bold mb-4 ps-2 border-start border-5 border-danger">Day 3: 九龍潮流</h3>
             <div class="timeline" id="list-day3"></div>
         </div>
-
         <div id="day4" class="content-section">
             <h3 class="fw-bold mb-4 ps-2 border-start border-5 border-danger">Day 4: 滿載而歸</h3>
-            
-            <ul class="nav nav-pills mb-3 justify-content-center" role="tablist">
-                <li class="nav-item mx-1" style="max-width: 45%;">
-                    <button id="btn-plan-a" class="nav-link w-100 active bg-primary" onclick="showDay4('A')">方案 A: 購物</button>
-                </li>
-                <li class="nav-item mx-1" style="max-width: 45%;">
-                    <button id="btn-plan-b" class="nav-link w-100 bg-light text-dark" onclick="showDay4('B')">方案 B: 大佛</button>
-                </li>
-            </ul>
-
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <button id="btn-plan-a" class="btn-plan active" onclick="showDay4('A')">方案 A: 購物</button>
+                <button id="btn-plan-b" class="btn-plan" onclick="showDay4('B')">方案 B: 大佛</button>
+            </div>
             <div id="day4-list-container" class="timeline"></div>
         </div>
     </div>
@@ -285,26 +250,17 @@
             <div class="modal-content">
                 <div class="row g-0">
                     <div class="col-md-5 detail-left">
-                        <button type="button" class="btn-close btn-close-white position-absolute top-0 start-0 m-3 d-md-none" data-bs-dismiss="modal"></button>
-                        <div class="detail-icon-box">
-                            <i id="modal-icon" class="bi bi-geo-alt"></i>
-                        </div>
-                        <div id="modal-time" class="detail-time">10:00</div>
-                        <div id="modal-title" class="detail-title">景點名稱</div>
+                        <div class="detail-icon-box"><i id="modal-icon" class="bi bi-geo-alt"></i></div>
+                        <div id="modal-time" class="detail-time"></div>
+                        <div id="modal-title" class="detail-title"></div>
                     </div>
-                    <div class="col-md-7 detail-right position-relative">
-                        <button type="button" class="btn-close position-absolute top-0 end-0 m-3 d-none d-md-block" data-bs-dismiss="modal"></button>
-                        
+                    <div class="col-md-7 detail-right">
                         <div id="modal-img-wrapper" class="modal-image-container">
-                            <img id="modal-img" src="" alt="景點圖片" onerror="this.style.display='none'">
+                            <img id="modal-img" src="" alt="景點圖片" onerror="this.parentElement.style.display='none'">
                         </div>
-
                         <h5 class="fw-bold mb-2" style="color:var(--hk-gold)">行程介紹</h5>
-                        <p id="modal-desc" class="detail-desc flex-grow-1">...</p>
-                        
-                        <a id="modal-map-btn" href="#" target="_blank" class="btn-map-modal mt-3">
-                            <i class="bi bi-map-fill me-1"></i> Google Maps
-                        </a>
+                        <p id="modal-desc" class="detail-desc flex-grow-1"></p>
+                        <a id="modal-map-btn" href="#" target="_blank" class="btn-map-modal mt-3"><i class="bi bi-map-fill me-1"></i> Google Maps</a>
                     </div>
                 </div>
             </div>
@@ -312,12 +268,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // 預設的佔位圖片
-        const placeholderImg = "https://placehold.co/600x400?text=Insert+Image+Here";
-
-        // --- 1. 行程資料庫 ---
         const tripData = {
             day1: [
                 { time: "06:30", title: "起床 / 出門", icon: "bi-alarm", type: "sleep", desc: "檢查護照、港簽、八達通是否帶齊。\n預計 07:00 出門前往機場。" },
@@ -326,44 +277,44 @@
                 { time: "10:55", title: "抵達香港機場", icon: "bi-geo-alt-fill", type: "transport", desc: "跟隨指示入境，填寫入境卡。\n領取行李後前往巴士站。" },
                 { time: "12:00", title: "機場巴士 A11", icon: "bi-bus-front", type: "transport", img: "images/airport.webp", desc: "出海關後前往巴士總站。\nA11 往北角碼頭方向。\n車程約 40-50 分鐘，沿途可欣賞青馬大橋風景。" },
                 { time: "13:00", title: "灣仔睿景酒店", icon: "bi-luggage", type: "spot", map: "https://www.google.com/maps/search/?api=1&query=灣仔睿景酒店", img: "images/hotel.jpg", desc: "先寄放行李，辦理入住手續(若房間好了可先進房)。\n輕裝出門開始行程！" },
-                { time: "14:00", title: "世華茶餐廳", icon: "bi-cup-hot", type: "food", map: "https://maps.app.goo.gl/47K3Muc8j8LZ9iaU7", img: "/images/D1_lunch.jpg", desc: "第一餐當然要吃道地茶餐廳！\n推薦：乾炒牛河、西多士、凍檸茶。" },
+                { time: "14:00", title: "世華茶餐廳", icon: "bi-cup-hot", type: "food", map: "https://maps.app.goo.gl/xxx", img: "images/D1_lunch.jpg", desc: "道地茶餐廳，推薦：乾炒牛河。" },
                 { time: "15:30", title: "搭乘叮叮車前往銅鑼灣", icon: "bi-train-lightrail-front", type: "transport", img: "/images/dingding.jpg", desc: "在灣仔搭乘充滿復古風情的叮叮車前往銅鑼灣。\n體驗港島特有的街道景緻。" },
                 { time: "16:00", title: "維園 & 怡和午炮", icon: "bi-tree", type: "spot", map: "https://maps.app.goo.gl/rPNbZh3QhqQpLw2aA", img: "/images/victoria_park.jpg", desc: "維多利亞公園是香港最大的公園。\n怡和午炮就在附近，是一個歷史悠久的禮炮儀式點。\n適合散步拍照。" },
                 { time: "18:00", title: "大壹燒鵝", icon: "bi-fire", type: "food", map: "https://maps.app.goo.gl/dLhAsA6C1gzyy3q97", img: "images/D1_dinner.jpg", desc: "晚餐享用著名的燒鵝！\n皮脆肉嫩，記得沾梅子醬解膩。" }
             ],
             day2: [
                 { time: "09:30", title: "起床", icon: "bi-sun", type: "sleep", desc: "早安香港！10:00 準時出門。" },
-                { time: "10:30", title: "薔紅餐廳", icon: "bi-egg-fried", type: "food", map: "https://maps.app.goo.gl/DATPuberoe4xnxkb6", img: "/images/D2_lunch.jpg", desc: "必點：脆皮燒春雞、豬扒包拼茄汁意粉。" },
-                { time: "12:00", title: "山頂纜車", icon: "bi-arrow-up-circle", type: "spot", map: "https://maps.app.goo.gl/t6DKm5UecD3ejaER8", img: "/images/mountain_cable_car.jpg", desc: "前往中環花園道總站搭乘第六代山頂纜車。\n車身傾斜角度很大，記得抓穩，風景絕佳！" },
-                { time: "12:15", title: "獅子亭 & 凌霄閣", icon: "bi-camera", type: "spot", map:"https://maps.app.goo.gl/L3qGVXbiL7LbyeJn7", img: "/images/lion_tower.jpg", desc: "香港最經典的明信片視角。\n可以在獅子亭免費觀景，或上凌霄閣摩天台(若有票)。" },
-                { time: "13:30", title: "杜莎夫人蠟像館", icon: "bi-person-badge", type: "spot", map:"https://maps.app.goo.gl/xrzRUWdbZ56PvN1HA", img: "/images/dusseldorf_wax_museum.jpg", desc: "(選配行程)\n如果對明星蠟像有興趣可以進去逛逛，冷氣很涼。" },
-                { time: "14:30", title: "大館 Tai Kwun", icon: "bi-bricks", type: "spot", map:"https://maps.app.goo.gl/FfjHsNehnTnXuGpa6", img: "/images/tai_kwun.jpg", desc: "前中區警署建築群活化。\n可以在監獄操場拍照，參觀古蹟展覽，建築非常有特色。" },
-                { time: "16:00", title: "中環半山扶手電梯", icon: "bi-arrow-up-right", type: "spot", map:"https://maps.app.goo.gl/EmGA28kysfRiGUBw7", img: "/images/chinese_culture_center.jpg", desc: "世界最長的戶外手扶梯系統。\n電影《重慶森林》拍攝地。\n順道逛逛活化後的中環街市。" },
-                { time: "18:00", title: "沾仔記", icon: "bi-bowl", type: "food", map:"https://maps.app.goo.gl/mERVR8yDZSTJzBZv9", img:"/images/zhang_zi_ji.jpg" , desc:"位於威靈頓街。\n連續多年米其林推薦。\n招牌：至尊三寶麵 (雲吞、鯪魚球、鮮牛肉)。" }
+                { time: "10:30", title: "薔紅餐廳", icon: "bi-egg-fried", type: "food", map: "https://maps.app.goo.gl/DATPuberoe4xnxkb6", img: "images/D2_lunch.jpg", desc: "必點：脆皮燒春雞、豬扒包拼茄汁意粉。" },
+                { time: "12:00", title: "山頂纜車", icon: "bi-arrow-up-circle", type: "spot", map: "https://maps.app.goo.gl/t6DKm5UecD3ejaER8", img: "images/mountain_cable_car.jpg", desc: "前往中環花園道總站搭乘第六代山頂纜車。\n車身傾斜角度很大，記得抓穩，風景絕佳！" },
+                { time: "12:15", title: "獅子亭 & 凌霄閣", icon: "bi-camera", type: "spot", map:"https://maps.app.goo.gl/L3qGVXbiL7LbyeJn7", img: "images/lion_tower.jpg", desc: "香港最經典的明信片視角。\n可以在獅子亭免費觀景，或上凌霄閣摩天台(若有票)。" },
+                { time: "13:30", title: "杜莎夫人蠟像館", icon: "bi-person-badge", type: "spot", map:"https://maps.app.goo.gl/xrzRUWdbZ56PvN1HA", img: "images/dusseldorf_wax_museum.jpg", desc: "(選)\n如果對明星蠟像有興趣可以進去逛逛，冷氣很涼。" },
+                { time: "14:30", title: "大館 Tai Kwun", icon: "bi-bricks", type: "spot", map:"https://maps.app.goo.gl/FfjHsNehnTnXuGpa6", img: "images/tai_kwun.jpg", desc: "前中區警署建築群活化。\n可以在監獄操場拍照，參觀古蹟展覽，建築非常有特色。" },
+                { time: "16:00", title: "中環半山扶手電梯", icon: "bi-arrow-up-right", type: "spot", map:"https://maps.app.goo.gl/EmGA28kysfRiGUBw7", img: "images/chinese_culture_center.jpg", desc: "世界最長的戶外手扶梯系統。\n電影《重慶森林》拍攝地。\n順道逛逛活化後的中環街市。" },
+                { time: "17:30", title: "觀光巴士落日飛車H2K", icon: "bi-bus", type: "transport", map:"https://maps.app.goo.gl/P2VtPpCiva7hEScr5", img:"images/bus_H2K.png" , desc:"每日：下午6:30至晚上10:30，每6分鐘至半小時一班。\n夜遊香港的經典選擇，可欣賞維多利亞港夜景。" }
             ],
             day3: [
-                { time: "09:30", title: "起床", icon: "bi-emoji-smile", type: "sleep", desc: "睡飽一點，今天要走九龍區。" },
-                { time: "11:00", title: "金華冰廳", icon: "bi-cup", type: "food", map:"https://maps.app.goo.gl/GCodwy9kML8ULVcq7", img: "/images/D1_brunch.jpg", desc: "號稱全香港第一名的菠蘿油！\n外皮酥蘆，牛油厚切，必吃。" },
-                { time: "12:00", title: "朗豪坊", icon: "bi-bag", type: "spot", map:"https://maps.app.goo.gl/hzzmWu5aby45W2w58",  desc: "旺角地標商場。\n記得搭乘超長的「通天梯」。\n頂樓有許多特色小店和 LEGO 專賣店。" },
-                { time: "13:00", title: "旺角通菜街", icon: "bi-shop", type: "spot", map:"https://maps.app.goo.gl/1Q8qdKRAjPT8Zrbp9", img: "/images/tung_chai.jpg", desc: "俗稱金魚街。\n可以看到很多金魚掛在袋子裡賣的獨特景象。" },
-                { time: "14:00", title: "女人街", icon: "bi-people", type: "spot", map:"https://maps.app.goo.gl/eoScUXbjpRtusRKh8", img: "/images/girls.jpg", desc: "通菜街的另一段，販賣各種廉價衣物、紀念品。\n體驗香港市井街道的擁擠與熱鬧。" },
-                { time: "15:30", title: "舊油麻地警署", icon: "bi-building-lock", type: "spot", map:"https://maps.app.goo.gl/411iXFfL163fdg7h7", img: "/images/old_yau_ming_dao_police_station.jpg", desc: "港產片最常出現的警署！\n典型的愛德華式建築，雖然已搬遷但外觀保留完整，是打卡聖地。" },
-                { time: "17:30", title: "九龍公園", icon: "bi-tree-fill", type: "spot", map:"https://maps.app.goo.gl/5J1yhpW15WmJ1A5m8", img: "/images/kowloon_park.jpg", desc: "鬧市中的綠洲。\n可以看到紅鶴，稍作休息。" },
-                { time: "18:00", title: "1瓏點心", icon: "bi-basket", type: "food", map:"https://maps.app.goo.gl/QserEXQhVYtu8XxZ6", img: "/images/1_lung_dim_sum.jpg", desc: "平價米其林一星港點。\n推薦：蝦餃、燒賣、馬拉糕。" },
-                { time: "19:30", title: "西九文化區", icon: "bi-stars", type: "spot", map:"https://maps.app.goo.gl/sLCtHUee5LoxFtqGA", img: "/images/west_kowloon_culture.jpg", desc: "最新的熱門景點，M+博物館外的大草地。\n從這裡看維多利亞港夜景跟尖沙咀角度不同，視野更開闊。" },
+                { time: "09:00", title: "起床", icon: "bi-emoji-smile", type: "sleep", desc: "睡飽一點，今天要走九龍區。" },
+                { time: "11:00", title: "米線傳", icon: "bi-cup", type: "food", map:"https://maps.app.goo.gl/uPS54DZySG6ZLStj7", img: "images/D1_brunch.jpg", desc: "米線傳是香港著名的米線店。\n推薦：招牌米線、港式奶茶。" },
+                { time: "12:00", title: "九龍寨城公園", icon: "bi-bag", type: "spot", map:"https://maps.app.goo.gl/rMxVoWmhL1MtR7uk9", img: "images/kowloon_ancient_city_park.jpg", desc: "九龍寨城遺址，現為公園。\n可參觀舊時的建築與歷史展示。" },
+                { time: "13:00", title: "旺角通菜街", icon: "bi-shop", type: "spot", map:"https://maps.app.goo.gl/1Q8qdKRAjPT8Zrbp9", img: "images/tung_chai.jpg", desc: "俗稱金魚街。\n可以看到很多金魚掛在袋子裡賣的獨特景象。" },
+                { time: "14:00", title: "女人街", icon: "bi-people", type: "spot", map:"https://maps.app.goo.gl/eoScUXbjpRtusRKh8", img: "images/girls.jpg", desc: "通菜街的另一段，販賣各種廉價衣物、紀念品。\n體驗香港市井街道的擁擠與熱鬧。" },
+                { time: "15:30", title: "舊油麻地警署", icon: "bi-building-lock", type: "spot", map:"https://maps.app.goo.gl/411iXFfL163fdg7h7", img: "images/old_yau_ming_dao_police_station.jpg", desc: "港產片最常出現的警署！\n典型的愛德華式建築，雖然已搬遷但外觀保留完整，是打卡聖地。" },
+                { time: "17:30", title: "九龍公園", icon: "bi-tree-fill", type: "spot", map:"https://maps.app.goo.gl/5J1yhpW15WmJ1A5m8", img: "images/kowloon_park.jpg", desc: "鬧市中的綠洲。\n可以看到紅鶴，稍作休息。" },
+                { time: "18:00", title: "1瓏點心", icon: "bi-basket", type: "food", map:"https://maps.app.goo.gl/QserEXQhVYtu8XxZ6", img: "images/1_lung_dim_sum.jpg", desc: "平價米其林一星港點。\n推薦：蝦餃、燒賣、馬拉糕。" },
+                { time: "19:30", title: "西九文化區", icon: "bi-stars", type: "spot", map:"https://maps.app.goo.gl/sLCtHUee5LoxFtqGA", img: "images/west_kowloon_culture.jpg", desc: "最新的熱門景點，M+博物館外的大草地。\n從這裡看維多利亞港夜景跟尖沙咀角度不同，視野更開闊。" },
                 { time: "20:00", title: "廟街夜市", icon: "bi-shop-window", type: "spot", map:"https://maps.app.goo.gl/BDmB84HPEqmQahau7", desc: "若還有體力，可以來逛逛夜市。\n感受香港夜晚的活力。" }
             ],
             day4A: [
                 { time: "09:30", title: "起床 & 退房", icon: "bi-door-open", type: "sleep", desc: "整理行李，辦理退房。\n在飯店附近找間咖啡廳吃早午餐。" },
                 { time: "13:00", title: "抵達東涌站", icon: "bi-train-front", type: "transport", desc: "帶著行李移動到東涌。\n東薈城有大型置物櫃可寄放行李 (需準備零錢或八達通)。" },
-                { time: "13:15", title: "東薈城 Outlet", icon: "bi-bag-check", type: "spot", map:"https://maps.app.goo.gl/7rrrAgcSd5JtZ2ig6", img: "/images/dong_hui_city_outlet.jpg", desc: "香港最大的 Outlet 商場。\nNike, Adidas, Coach, Burberry 等品牌常有折扣。\n把握最後購物時間！" },
+                { time: "13:15", title: "東薈城 Outlet", icon: "bi-bag-check", type: "spot", map:"https://maps.app.goo.gl/7rrrAgcSd5JtZ2ig6", img: "images/dong_hui_city_outlet.jpg", desc: "香港最大的 Outlet 商場。\nNike, Adidas, Coach, Burberry 等品牌常有折扣。\n把握最後購物時間！" },
                 { time: "15:30", title: "S1 巴士往機場", icon: "bi-bus-front", type: "transport", desc: "從東涌巴士總站搭乘 S1 巴士。\n車程約 15 分鐘直達機場。" }
             ],
             day4B: [
                 { time: "09:00", title: "起床 & 退房", icon: "bi-door-open", type: "sleep", desc: "早點起床，大嶼山行程需要時間。\n退房後簡單吃早餐。" },
                 { time: "12:30", title: "抵達東涌站", icon: "bi-train-front", type: "transport", desc: "寄放行李於東薈城或東涌站置物櫃。" },
-                { time: "12:45", title: "昂坪纜車", icon: "bi-clouds", type: "spot", map:"https://maps.app.goo.gl/jr6dhiDnCoqf99478", img: "/images/ping_ya_cable_car.jpg", desc: "搭乘纜車前往昂坪。\n建議事先買好票，若膽子大可選「水晶車廂」透明地板。" },
-                { time: "13:00", title: "天壇大佛", icon: "bi-brightness-high", type: "spot", map:"https://maps.app.goo.gl/XihhRuMFnjvFUszw9", img: "/images/tian_tan_buddha.jpg", desc: "參觀昂坪市集、爬樓梯朝聖大佛。\n山上空氣清新，環境清幽。" },
+                { time: "12:45", title: "昂坪纜車", icon: "bi-clouds", type: "spot", map:"https://maps.app.goo.gl/jr6dhiDnCoqf99478", img: "images/ping_ya_cable_car.jpg", desc: "搭乘纜車前往昂坪。\n建議事先買好票，若膽子大可選「水晶車廂」透明地板。" },
+                { time: "13:00", title: "天壇大佛", icon: "bi-brightness-high", type: "spot", map:"https://maps.app.goo.gl/XihhRuMFnjvFUszw9", img: "images/tian_tan_buddha.jpg", desc: "參觀昂坪市集、爬樓梯朝聖大佛。\n山上空氣清新，環境清幽。" },
                 { time: "15:30", title: "纜車下山", icon: "bi-arrow-down", type: "transport", desc: "搭纜車回東涌，領行李，轉 S1 巴士去機場。" }
             ],
             commonReturn: [
@@ -372,95 +323,39 @@
             ]
         };
 
-        // --- 2. 渲染函式 ---
         function renderTimeline(elementId, data) {
             const container = document.getElementById(elementId);
             container.innerHTML = ''; 
-            
-            data.forEach(item => {
+            data.forEach((item, index) => {
                 let colorClass = 'marker-spot';
                 if(item.type === 'sleep') colorClass = 'marker-sleep';
                 if(item.type === 'transport') colorClass = 'marker-transport';
                 if(item.type === 'food') colorClass = 'marker-food';
 
-                const html = `
-                    <div class="timeline-item" onclick='openModal(${JSON.stringify(item)})'>
-                        <div class="timeline-marker ${colorClass}">
-                            <i class="bi ${item.icon}"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="time-badge">${item.time}</div>
-                            <div class="location-title">${item.title}</div>
-                            <div class="location-desc">點擊查看詳情...</div>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += html;
+                // 使用 data- 屬性存儲索引值，避開字串轉義問題
+                const div = document.createElement('div');
+                div.className = 'timeline-item';
+                div.innerHTML = `
+                    <div class="timeline-marker ${colorClass}"><i class="bi ${item.icon}"></i></div>
+                    <div class="timeline-content">
+                        <div class="time-badge">${item.time}</div>
+                        <div class="location-title">${item.title}</div>
+                        <div class="location-desc">點擊查看詳情...</div>
+                    </div>`;
+                div.onclick = () => openModal(item);
+                container.appendChild(div);
             });
         }
 
-        // --- 3. 初始化 ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderTimeline('list-day1', tripData.day1);
-            renderTimeline('list-day2', tripData.day2);
-            renderTimeline('list-day3', tripData.day3);
-            showDay4('A');
-        });
-
-        // --- 4. 切換頁面 ---
-        function switchTab(tabId, btn) {
-            const hero = document.getElementById('home-hero');
-            if (tabId === 'home') hero.style.display = 'flex';
-            else hero.style.display = 'none';
-
-            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-
-            document.querySelectorAll('.navbar .nav-link').forEach(el => el.classList.remove('active'));
-            btn.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // --- 5. Day 4 方案切換 (Bug Fixed) ---
-        function showDay4(plan) {
-            // 切換按鈕樣式
-            const btnA = document.getElementById('btn-plan-a');
-            const btnB = document.getElementById('btn-plan-b');
-
-            if (plan === 'A') {
-                btnA.classList.add('active', 'bg-primary');
-                btnA.classList.remove('bg-light', 'text-dark');
-                
-                btnB.classList.remove('active', 'bg-success', 'text-white');
-                btnB.classList.add('bg-light', 'text-dark');
-            } else {
-                btnB.classList.add('active', 'bg-success', 'text-white');
-                btnB.classList.remove('bg-light', 'text-dark');
-
-                btnA.classList.remove('active', 'bg-primary');
-                btnA.classList.add('bg-light', 'text-dark');
-            }
-
-            // 渲染資料
-            let data = (plan === 'A') ? tripData.day4A : tripData.day4B;
-            data = data.concat(tripData.commonReturn);
-            renderTimeline('day4-list-container', data);
-        }
-
-        // --- 6. 開啟 Modal ---
         const detailModal = new bootstrap.Modal(document.getElementById('detailModal'));
-
         function openModal(item) {
             document.getElementById('modal-title').innerText = item.title;
             document.getElementById('modal-time').innerText = item.time;
             document.getElementById('modal-desc').innerText = item.desc;
             document.getElementById('modal-icon').className = `bi ${item.icon}`;
             
-            // 處理圖片顯示
             const imgWrapper = document.getElementById('modal-img-wrapper');
             const imgTag = document.getElementById('modal-img');
-            
             if (item.img) {
                 imgTag.src = item.img;
                 imgWrapper.style.display = 'block'; 
@@ -468,18 +363,38 @@
                 imgWrapper.style.display = 'none'; 
             }
 
-            // 處理地圖按鈕
             const mapBtn = document.getElementById('modal-map-btn');
-            if (item.map) {
+            if (item.map && item.map !== "#") {
                 mapBtn.href = item.map;
                 mapBtn.style.display = 'inline-block';
             } else {
                 mapBtn.style.display = 'none';
             }
-
             detailModal.show();
         }
 
+        function switchTab(tabId, btn) {
+            document.getElementById('home-hero').style.display = (tabId === 'home') ? 'flex' : 'none';
+            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.navbar .nav-link').forEach(el => el.classList.remove('active'));
+            btn.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDay4(plan) {
+            document.getElementById('btn-plan-a').classList.toggle('active', plan === 'A');
+            document.getElementById('btn-plan-b').classList.toggle('active', plan === 'B');
+            let data = (plan === 'A') ? tripData.day4A : tripData.day4B;
+            renderTimeline('day4-list-container', data.concat(tripData.commonReturn));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline('list-day1', tripData.day1);
+            renderTimeline('list-day2', tripData.day2); // 範例引用
+            renderTimeline('list-day3', tripData.day3); // 範例引用
+            showDay4('A');
+        });
     </script>
 </body>
 </html>
